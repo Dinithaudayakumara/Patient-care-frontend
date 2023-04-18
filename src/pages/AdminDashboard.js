@@ -1,8 +1,8 @@
 import React from "react";
-import UserDetails from "../Layouts/Admin/UserDetails";
+import HomePage from "../Layouts/Admin/HomePage";
 
 export default function AdminDashboard() {
   return <div>
-    <UserDetails />
+    <HomePage />
   </div>;
 }
