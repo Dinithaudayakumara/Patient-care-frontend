@@ -1,12 +1,8 @@
 import React from "react";
-import TopNav from "../Layouts/common/TopNav";
-import UserManage from "../Layouts/Admin/UserManage";
+import UserDetails from "../Layouts/Admin/UserDetails";
 
 export default function AdminDashboard() {
-  return (
-    <div>
-      <TopNav />
-      <UserManage />
-    </div>
-  );
+  return <div>
+    <UserDetails />
+  </div>;
 }

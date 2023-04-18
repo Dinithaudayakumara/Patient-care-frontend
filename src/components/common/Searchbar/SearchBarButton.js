@@ -6,7 +6,7 @@ export default function SearchBarButton() {
   return (
     <div>
       <Button variant="outlined" startIcon={<SearchIcon />}>
-        SearchS
+        Search
       </Button>
     </div>
   );
