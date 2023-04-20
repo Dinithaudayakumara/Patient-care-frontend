@@ -4,7 +4,7 @@ import HomePage from "../Layouts/Admin/HomePage";
 export default function AdminDashboard() {
   return (
     <div>
-    <HomePage />
+      <HomePage />
     </div>
   );
 }

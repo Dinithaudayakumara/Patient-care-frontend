@@ -5,6 +5,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import NoPage from "./pages/NoPage";
 import PharmacistDashboarod from "./pages/PharmacistDashboarod";
 import DoctorDashborad from "./pages/DoctorDashborad";
+import DoctorAccountDashborad from "./Layouts/Admin/DoctorAccountDashborad";
+import PatientAccountDashborad from "./Layouts/Admin/PatientAccountDashborad";
+import PharmacistAccountDashborad from "./Layouts/Admin/PharmacistAccountDashborad";
 
 function App() {
   return (
@@ -15,6 +18,14 @@ function App() {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="doctor" element={<DoctorDashborad />} />
           <Route path="paharmacist" element={<PharmacistDashboarod />} />
+          <Route path="paharmacist" element={<PharmacistDashboarod />} />
+          <Route path="admin/doctor" element={<DoctorAccountDashborad />} />
+          <Route path="admin/patient" element={<PatientAccountDashborad />} />
+          <Route
+            path="admin/pharmacist"
+            element={<PharmacistAccountDashborad />}
+          />
+
           <Route path="*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>
