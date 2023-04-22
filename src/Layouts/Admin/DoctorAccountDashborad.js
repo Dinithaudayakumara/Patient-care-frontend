@@ -7,7 +7,7 @@ import AdminDoctorTable from "./AdminDoctorTable";
 export default function DoctorAccountDashborad() {
   return (
     <div>
-      <AdminTopNav image={DoctorPic} />
+      <AdminTopNav image={DoctorPic} userType="Doctor Details" />
       <SearchBarWithButton />
       <AdminDoctorTable />
     </div>

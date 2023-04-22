@@ -7,7 +7,7 @@ import AdminPharmacistTable from "./AdminPharmacistTable";
 export default function PharmacistAccountDashborad() {
   return (
     <div>
-      <AdminTopNav image={Pharmacistpic} />
+      <AdminTopNav image={Pharmacistpic} userType="Pharmacist Details" />
       <SearchBarWithButton />
       <AdminPharmacistTable />
     </div>

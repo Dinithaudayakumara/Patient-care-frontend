@@ -7,7 +7,7 @@ import AdminTopNav from "./AdminTopNav";
 export default function PatientAccountDashborad() {
   return (
     <div>
-      <AdminTopNav image={PatientPic} />
+      <AdminTopNav image={PatientPic} userType="Patient Details" />
       <SearchBarWithButton />
       <AdminPatientTable />
     </div>

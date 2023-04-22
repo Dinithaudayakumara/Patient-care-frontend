@@ -1,52 +1,63 @@
+import {
+  Grid,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-
-function createData(id, name, number, date, doctorname) {
-  return { id, name, number, date, doctorname };
-}
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const rows = [
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
+  { id: "#KFH123", name: "Olive G.", number:"075457545", typeofdoctor:"Family medicine"},
+  { id: "#KFH123", name: "Olive G.", number:"075457545", typeofdoctor:"Internal Medicine"},
+  { id: "#KFH123", name: "Olive G.", number:"075457545", typeofdoctor:"Pediatrician"},
+  { id: "#KFH123", name: "Olive G.", number:"075457545", typeofdoctor:"Cardiologist"},
+
 ];
 
 export default function BasicTable() {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <div>
+      <Table>
         <TableHead>
           <TableRow>
-            <TableCell align="center">ID</TableCell>
-            <TableCell align="center">Name</TableCell>
-            <TableCell align="center">T.P</TableCell>
-            <TableCell align="center">Last Date</TableCell>
-            <TableCell align="left">Checked Doctor Name</TableCell>
+            <TableCell>ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>T.P</TableCell>
+            <TableCell>Type of Doctor</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell align="center"> {row.id}</TableCell>
-              <TableCell align="center">{row.name}</TableCell>
-              <TableCell align="center">{row.number}</TableCell>
-              <TableCell align="center">{row.date}</TableCell>
-              <TableCell align="left">{row.doctorname}</TableCell>
+          {rows.map((row, key) => (
+            <TableRow key={key} hover>
+              <TableCell>{row.id}</TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.number}</TableCell>
+              <TableCell>{row.typeofdoctor}</TableCell>
+              <TableCell>
+                
+                
+                <Grid container justifyContent="center">
+                  <Grid item>
+                    <IconButton color="secondary">
+                      <EditOutlinedIcon style={{ color: "silver" }} />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <IconButton color="primary">
+                      <DeleteIcon style={{ color: "red" }} />
+                    </IconButton>
+                  </Grid>
+                </Grid></TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </div>
   );
 }

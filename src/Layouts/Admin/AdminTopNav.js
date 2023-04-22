@@ -2,7 +2,7 @@ import { Divider, Grid, Typography } from "@mui/material";
 import React from "react";
 import BackButton from "../../components/common/Adminhome/BackButton";
 
-export default function AdminTopNav({ image }) {
+export default function AdminTopNav({ image, userType }) {
   return (
     <div>
       <Grid
@@ -23,7 +23,7 @@ export default function AdminTopNav({ image }) {
             </Grid>
             <Grid item style={{ textAlign: "left" }}>
               <Typography sx={{ fontSize: 30 }}>
-                <b>Patient Details</b>
+                <b>{userType}</b>
               </Typography>
               <Typography>#PHA1234</Typography>
               <Typography>Admin</Typography>

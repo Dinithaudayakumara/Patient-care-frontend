@@ -14,7 +14,7 @@ export default function Adminbackgroundpic() {
       <Typography sx={{ fontSize: 30 }}>
         <b>Patient</b> <span>Care</span>
       </Typography>
-      <Grid container spacing={6} justifyContent="center" pt={10}>
+      <Grid container spacing={6} justifyContent="center" pt={10} pb={15}>
         <Grid item>
           <AdminUserType
             type={"Doctor"}
@@ -38,8 +38,10 @@ export default function Adminbackgroundpic() {
         </Grid>
       </Grid>
 
-      <Button pt={200}>
-        <ExitToAppIcon /> {/* Add the ExitToAppIcon here */}
+      <Button>
+        <ExitToAppIcon />
+
+        <Typography>Logout</Typography>
       </Button>
     </div>
   );
