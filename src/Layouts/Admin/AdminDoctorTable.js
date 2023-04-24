@@ -1,4 +1,8 @@
 import {
+
+  Dialog,
+
+  DialogTitle,
   Grid,
   IconButton,
   Table,
@@ -20,8 +24,17 @@ const rows = [
 ];
 
 export default function BasicTable() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
-    <div>
+    <div style={{paddingLeft: 10,paddingRight:10}}>
       <Table>
         <TableHead>
           <TableRow>
@@ -42,14 +55,14 @@ export default function BasicTable() {
               <TableCell>
                 
                 
-                <Grid container justifyContent="center">
+                <Grid container justifyContent="flex-start" spacing={2}>
                   <Grid item>
-                    <IconButton color="secondary">
+                    <IconButton color="secondary" onClick={handleClickOpen}>
                       <EditOutlinedIcon style={{ color: "silver" }} />
                     </IconButton>
                   </Grid>
                   <Grid item>
-                    <IconButton color="primary">
+                    <IconButton color="primary" onClick={handleClickOpen}>
                       <DeleteIcon style={{ color: "red" }} />
                     </IconButton>
                   </Grid>
@@ -58,6 +71,16 @@ export default function BasicTable() {
           ))}
         </TableBody>
       </Table>
+      <Dialog
+        open={open}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>
+          
+        </DialogTitle>
+      </Dialog>
     </div>
   );
 }
