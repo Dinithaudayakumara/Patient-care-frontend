@@ -1,54 +1,103 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import {
 
-function createData(id, name, number, date, doctorname, action) {
-  return { id, name, number, date, doctorname, action };
-}
+  Dialog,
+  DialogTitle,
+  Grid,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import React from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+
 
 const rows = [
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
+  { appointmentid: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", time:"09.30AM"},
+  { appointmentid: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", time:"09.30AM"},
+  { appointmentid: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", time:"09.30AM"},
+  { appointmentid: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", time:"09.30AM"},
+
 ];
 
 export default function BasicTable() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <div style={{paddingLeft:50}}>
+      <Table>
         <TableHead>
           <TableRow>
-            <TableCell align="center">ID</TableCell>
-            <TableCell align="center">Name</TableCell>
-            <TableCell align="center">T.P</TableCell>
-            <TableCell align="center">Last Date</TableCell>
-            <TableCell align="left">Checked Doctor Name</TableCell>
-            <TableCell align="center">Action</TableCell>
+            <TableCell align="left">Appointment ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>T.P</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell>Time</TableCell>
+            <TableCell align="center" >Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell align="center"> {row.id}</TableCell>
-              <TableCell align="center">{row.name}</TableCell>
-              <TableCell align="center">{row.number}</TableCell>
-              <TableCell align="center">{row.date}</TableCell>
-              <TableCell align="left">{row.doctorname}</TableCell>
-              <TableCell align="center">{row.action}</TableCell>
+          {rows.map((row, key) => (
+            <TableRow key={key} hover>
+              <TableCell>{row.appointmentid}</TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.number}</TableCell>
+              <TableCell>{row.date}</TableCell>
+              <TableCell>{row.time}</TableCell>
+              <TableCell >
+                
+              <Grid container justifyContent="center" spacing={2} >
+
+              <Grid item>
+                    
+                    <IconButton color="secondary" onClick={handleClickOpen}>
+                      <PictureAsPdfIcon style={{ color: "red" }} />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    
+                    <IconButton color="secondary" onClick={handleClickOpen}>
+                      <EditOutlinedIcon style={{ color: "silver" }} />
+                    </IconButton>
+                  </Grid>
+                  <Grid item>
+                    <IconButton color="primary" onClick={handleClickOpen}>
+                      <DeleteIcon style={{ color: "red" }} />
+                      
+                    </IconButton>
+                  </Grid>
+                </Grid>
+
+
+                
+             </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+      
+      <Dialog
+        open={open}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>
+          
+        </DialogTitle>
+      </Dialog>
+
+    </div>
   );
 }

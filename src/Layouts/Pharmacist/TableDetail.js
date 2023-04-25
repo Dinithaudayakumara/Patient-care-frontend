@@ -1,52 +1,53 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import {
 
-function createData(id, name, number, doctorname, data) {
-  return { id, name, number, doctorname, data };
-}
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import React from "react";
+
 
 const rows = [
-  createData("#KFH123", "Olive.G.S", "+9475457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
-  createData("#KFH123", "Olive.G", "075457545", "12/12/2022", "Dr.Devid"),
+  { id: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", doctorname:"Dr.Devid"},
+  { id: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", doctorname:"Dr.Devid"},
+  { id: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", doctorname:"Dr.Devid"},
+  { id: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", doctorname:"Dr.Devid"},
+
 ];
 
 export default function BasicTable() {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <div style={{paddingLeft:50}}>
+      <Table>
         <TableHead>
           <TableRow>
-            <TableCell align="center">ID</TableCell>
-            <TableCell align="center">Name</TableCell>
-            <TableCell align="center">T.P</TableCell>
-            <TableCell align="center">Last Date</TableCell>
-            <TableCell align="center">Checked Doctor Name</TableCell>
+            <TableCell align="left">ID</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>T.P</TableCell>
+            <TableCell>Date</TableCell>
+            <TableCell>Checked Doctor Name</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell align="center"> {row.id}</TableCell>
-              <TableCell align="center">{row.name}</TableCell>
-              <TableCell align="center">{row.number}</TableCell>
-              <TableCell align="center">{row.doctorname}</TableCell>
-              <TableCell align="center">{row.data}</TableCell>
+          {rows.map((row, key) => (
+            <TableRow key={key} hover>
+              <TableCell>{row.id}</TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.number}</TableCell>
+              <TableCell>{row.date}</TableCell>
+              <TableCell>{row.doctorname}</TableCell>
+              <TableCell>
+                
+                
+             </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </div>
   );
 }
+

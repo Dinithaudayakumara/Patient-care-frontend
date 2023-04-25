@@ -4,7 +4,8 @@ import React from "react";
 export default function SearchField() {
   return (
     <div>
-      <TextField placeholder="Search" style={{ width: "600px" }} />
+      <TextField placeholder="Search" sx={{ m: 1, width: 670 }} size="small" />  
+          
     </div>
   );
 }

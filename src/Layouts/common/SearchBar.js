@@ -5,8 +5,8 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 export default function SearchBar() {
   return (
-    <div>
-      <Grid2 container spacing={3} alignItems="center">
+    <div >
+      <Grid2 container spacing={3} alignItems="center" >
         <Grid2 item>
           <SearchField />
         </Grid2>

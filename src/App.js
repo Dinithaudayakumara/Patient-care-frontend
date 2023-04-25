@@ -17,8 +17,7 @@ function App() {
           <Route index element={<SignInPage />} />
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="doctor" element={<DoctorDashborad />} />
-          <Route path="paharmacist" element={<PharmacistDashboarod />} />
-          <Route path="paharmacist" element={<PharmacistDashboarod />} />
+          <Route path="paharmacists" element={<PharmacistDashboarod />} />
           <Route path="admin/doctor" element={<DoctorAccountDashborad />} />
           <Route path="admin/patient" element={<PatientAccountDashborad />} />
           <Route
