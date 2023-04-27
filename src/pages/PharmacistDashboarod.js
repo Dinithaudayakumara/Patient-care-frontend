@@ -9,7 +9,6 @@ export default function PharmacistDashboarod() {
       <TopNav />
       <PatientInformation />
       <TableDetail />
-
     </div>
   );
 }

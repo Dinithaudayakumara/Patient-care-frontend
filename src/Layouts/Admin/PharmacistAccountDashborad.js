@@ -34,7 +34,7 @@ export default function PharmacistAccountDashborad() {
           },
         }}
       >
-       <PharmacistAddNewDialogBox />
+        <PharmacistAddNewDialogBox />
       </Dialog>
     </div>
   );

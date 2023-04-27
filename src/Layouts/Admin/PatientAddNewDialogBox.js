@@ -1,5 +1,5 @@
 import { Avatar, Grid, Typography } from "@mui/material";
-import React from 'react'
+import React from "react";
 import AddUserTextBox from "../../components/common/Adminhome/AddUserTextBox";
 import AddUserButton from "../../components/common/Adminhome/AddUserButton";
 
@@ -23,17 +23,19 @@ export default function PatientAddNewDialogBox() {
         <Grid item pl={5}>
           <AddUserTextBox name="Name" placeholder="Enter your Name" />
           <AddUserTextBox name="Email" placeholder="Enter your email address" />
-          <AddUserTextBox name="Password" placeholder="Enter Your Password"/>
-          <AddUserTextBox name="Phone Number" placeholder="Enter your Number"/>
+          <AddUserTextBox name="Password" placeholder="Enter Your Password" />
+          <AddUserTextBox name="Phone Number" placeholder="Enter your Number" />
         </Grid>
         <Grid item pr={17} pt={5} sx={{ textAlign: "center" }}>
           <Avatar sx={{ width: 180, height: 180 }}></Avatar>
-          <Typography pt={4} sx={{fontSize:13}}>Add Profile Picture</Typography>
+          <Typography pt={4} sx={{ fontSize: 13 }}>
+            Add Profile Picture
+          </Typography>
           <div style={{ paddingTop: 60 }}>
             <AddUserButton />
           </div>
         </Grid>
       </Grid>
     </div>
-  )
+  );
 }

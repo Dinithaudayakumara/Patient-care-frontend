@@ -23,12 +23,17 @@ export default function DoctorAddNewDialogBox() {
         <Grid item pl={5}>
           <AddUserTextBox name="Name" placeholder="Enter your Name" />
           <AddUserTextBox name="Email" placeholder="Enter your email address" />
-          <AddUserTextBox name="Password" placeholder="Enter Your Password"/>
-          <AddUserTextBox name="Type of Doctor " placeholder="Enter your Name"/>
+          <AddUserTextBox name="Password" placeholder="Enter Your Password" />
+          <AddUserTextBox
+            name="Type of Doctor "
+            placeholder="Enter your Name"
+          />
         </Grid>
         <Grid item pr={17} pt={5} sx={{ textAlign: "center" }}>
           <Avatar sx={{ width: 180, height: 180 }}></Avatar>
-          <Typography pt={4} sx={{fontSize:13}}>Add Profile Picture</Typography>
+          <Typography pt={4} sx={{ fontSize: 13 }}>
+            Add Profile Picture
+          </Typography>
           <div style={{ paddingTop: 60 }}>
             <AddUserButton />
           </div>

@@ -7,7 +7,6 @@ import { Dialog } from "@mui/material";
 import PatientAddNewDialogBox from "./PatientAddNewDialogBox";
 
 export default function PatientAccountDashborad() {
-
   const [open, setOpen] = React.useState(false);
 
   const OnClick = () => {
@@ -33,7 +32,7 @@ export default function PatientAccountDashborad() {
           },
         }}
       >
-       <PatientAddNewDialogBox />
+        <PatientAddNewDialogBox />
       </Dialog>
     </div>
   );

@@ -12,11 +12,34 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const rows = [
-  { id: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", doctorname:"Dr.Devid"},
-  { id: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", doctorname:"Dr.Devid"},
-  { id: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", doctorname:"Dr.Devid"},
-  { id: "#KFH123", name: "Olive G.", number:"075457545", date:"12/12/2022", doctorname:"Dr.Devid"},
-
+  {
+    id: "#KFH123",
+    name: "Olive G.",
+    number: "075457545",
+    date: "12/12/2022",
+    doctorname: "Dr.Devid",
+  },
+  {
+    id: "#KFH123",
+    name: "Olive G.",
+    number: "075457545",
+    date: "12/12/2022",
+    doctorname: "Dr.Devid",
+  },
+  {
+    id: "#KFH123",
+    name: "Olive G.",
+    number: "075457545",
+    date: "12/12/2022",
+    doctorname: "Dr.Devid",
+  },
+  {
+    id: "#KFH123",
+    name: "Olive G.",
+    number: "075457545",
+    date: "12/12/2022",
+    doctorname: "Dr.Devid",
+  },
 ];
 
 export default function BasicTable() {
@@ -42,8 +65,6 @@ export default function BasicTable() {
               <TableCell>{row.date}</TableCell>
               <TableCell>{row.doctorname}</TableCell>
               <TableCell>
-                
-                
                 <Grid container justifyContent="center">
                   <Grid item>
                     <IconButton color="secondary">
@@ -55,7 +76,8 @@ export default function BasicTable() {
                       <DeleteIcon style={{ color: "red" }} />
                     </IconButton>
                   </Grid>
-                </Grid></TableCell>
+                </Grid>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

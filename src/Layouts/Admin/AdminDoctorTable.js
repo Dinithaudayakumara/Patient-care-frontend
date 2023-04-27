@@ -1,7 +1,5 @@
 import {
-
   Dialog,
-
   DialogTitle,
   Grid,
   IconButton,
@@ -16,11 +14,30 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const rows = [
-  { id: "#KFH123", name: "Olive G.", number:"075457545", typeofdoctor:"Family medicine"},
-  { id: "#KFH123", name: "Olive G.", number:"075457545", typeofdoctor:"Internal Medicine"},
-  { id: "#KFH123", name: "Olive G.", number:"075457545", typeofdoctor:"Pediatrician"},
-  { id: "#KFH123", name: "Olive G.", number:"075457545", typeofdoctor:"Cardiologist"},
-
+  {
+    id: "#KFH123",
+    name: "Olive G.",
+    number: "075457545",
+    typeofdoctor: "Family medicine",
+  },
+  {
+    id: "#KFH123",
+    name: "Olive G.",
+    number: "075457545",
+    typeofdoctor: "Internal Medicine",
+  },
+  {
+    id: "#KFH123",
+    name: "Olive G.",
+    number: "075457545",
+    typeofdoctor: "Pediatrician",
+  },
+  {
+    id: "#KFH123",
+    name: "Olive G.",
+    number: "075457545",
+    typeofdoctor: "Cardiologist",
+  },
 ];
 
 export default function BasicTable() {
@@ -34,7 +51,7 @@ export default function BasicTable() {
     setOpen(false);
   };
   return (
-    <div style={{paddingLeft: 10,paddingRight:10}}>
+    <div style={{ paddingLeft: 10, paddingRight: 10 }}>
       <Table>
         <TableHead>
           <TableRow>
@@ -53,8 +70,6 @@ export default function BasicTable() {
               <TableCell>{row.number}</TableCell>
               <TableCell>{row.typeofdoctor}</TableCell>
               <TableCell>
-                
-                
                 <Grid container justifyContent="flex-start" spacing={2}>
                   <Grid item>
                     <IconButton color="secondary" onClick={handleClickOpen}>
@@ -66,7 +81,8 @@ export default function BasicTable() {
                       <DeleteIcon style={{ color: "red" }} />
                     </IconButton>
                   </Grid>
-                </Grid></TableCell>
+                </Grid>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -77,9 +93,7 @@ export default function BasicTable() {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>
-          
-        </DialogTitle>
+        <DialogTitle></DialogTitle>
       </Dialog>
     </div>
   );

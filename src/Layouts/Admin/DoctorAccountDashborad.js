@@ -7,7 +7,6 @@ import { Dialog } from "@mui/material";
 import DoctorAddNewDialogBox from "./DoctorAddNewDialogBox";
 
 export default function DoctorAccountDashborad() {
-
   const [open, setOpen] = React.useState(false);
 
   const OnClick = () => {
@@ -20,7 +19,6 @@ export default function DoctorAccountDashborad() {
 
   return (
     <div>
-
       <AdminTopNav image={DoctorPic} userType="Doctor Details" />
       <SearchBarWithButton OnClick={OnClick} />
       <AdminDoctorTable />
@@ -36,9 +34,8 @@ export default function DoctorAccountDashborad() {
           },
         }}
       >
-       <DoctorAddNewDialogBox />
+        <DoctorAddNewDialogBox />
       </Dialog>
-
     </div>
   );
 }
