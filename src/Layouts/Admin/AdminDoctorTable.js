@@ -12,35 +12,10 @@ import {
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-
-const rows = [
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    typeofdoctor: "Family medicine",
-  },
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    typeofdoctor: "Internal Medicine",
-  },
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    typeofdoctor: "Pediatrician",
-  },
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    typeofdoctor: "Cardiologist",
-  },
-];
+import { useSelector } from "react-redux";
 
 export default function BasicTable() {
+  const { allDoctorList } = useSelector((store) => store.doctorReducer);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -63,12 +38,12 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, key) => (
+          {allDoctorList.map((val, key) => (
             <TableRow key={key} hover>
-              <TableCell>{row.id}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.number}</TableCell>
-              <TableCell>{row.typeofdoctor}</TableCell>
+              <TableCell>{val._id}</TableCell>
+              <TableCell>{val.firstName + " " + val.lastName}</TableCell>
+              <TableCell>{val.mobileNumber}</TableCell>
+              <TableCell>{val.specialty}</TableCell>
               <TableCell>
                 <Grid container justifyContent="flex-start" spacing={2}>
                   <Grid item>

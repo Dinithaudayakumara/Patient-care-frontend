@@ -8,17 +8,27 @@ import PharmacistPic from "../../assets/images/pharmacistpic.png";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPatients } from "../../store/actions/patientAction";
+import { getAllDoctors } from "../../store/actions/doctorAction";
 
 export default function Adminbackgroundpic() {
   const dispatch = useDispatch();
 
   const { allPatientList } = useSelector((store) => store.patientReducer);
+  const { allDoctorList } = useSelector((store) => store.doctorReducer);
 
   useEffect(() => {
     if (allPatientList.length === 0) {
       dispatch(getAllPatients());
     }
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (allDoctorList.length === 0) {
+      dispatch(getAllDoctors());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
