@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "../../components/common/Logo";
 import { Button, Grid, Typography } from "@mui/material";
 import AdminUserType from "../../components/Adminhomepage/AdminUserType";
@@ -6,8 +6,20 @@ import DoctorPic from "../../assets/images/doctorpic.png";
 import PatientPic from "../../assets/images/patientpic.png";
 import PharmacistPic from "../../assets/images/pharmacistpic.png";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPatients } from "../../store/actions/patientAction";
 
 export default function Adminbackgroundpic() {
+  const dispatch = useDispatch();
+
+  const { allPatientList } = useSelector((store) => store.patientReducer);
+
+  useEffect(() => {
+    if (allPatientList.length === 0) {
+      dispatch(getAllPatients());
+    }
+  }, [dispatch]);
+
   return (
     <div>
       <Logo />
