@@ -9,12 +9,14 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPatients } from "../../store/actions/patientAction";
 import { getAllDoctors } from "../../store/actions/doctorAction";
+import { getAllPharmacists } from "../../store/actions/pharmacistAction";
 
 export default function Adminbackgroundpic() {
   const dispatch = useDispatch();
 
   const { allPatientList } = useSelector((store) => store.patientReducer);
   const { allDoctorList } = useSelector((store) => store.doctorReducer);
+  const { allPharmacistList } = useSelector((store) => store.pharmacistReducer);
 
   useEffect(() => {
     if (allPatientList.length === 0) {
@@ -26,6 +28,13 @@ export default function Adminbackgroundpic() {
   useEffect(() => {
     if (allDoctorList.length === 0) {
       dispatch(getAllDoctors());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (allPharmacistList.length === 0) {
+      dispatch(getAllPharmacists());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

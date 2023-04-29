@@ -10,35 +10,11 @@ import {
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-
-const rows = [
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    location: "Colombo 07",
-  },
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    location: "Colombo 07",
-  },
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    location: "Colombo 07",
-  },
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    location: "Colombo 07",
-  },
-];
+import { useSelector } from "react-redux";
 
 export default function BasicTable() {
+  const { allPharmacistList } = useSelector((store) => store.pharmacistReducer);
+
   return (
     <div>
       <Table>
@@ -52,12 +28,12 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, key) => (
+          {allPharmacistList.map((val, key) => (
             <TableRow key={key} hover>
-              <TableCell>{row.id}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.number}</TableCell>
-              <TableCell>{row.location}</TableCell>
+              <TableCell>{val._id}</TableCell>
+              <TableCell>{val.firstName + " " + val.lastName}</TableCell>
+              <TableCell>{val.mobileNumber}</TableCell>
+              <TableCell>{val.location}</TableCell>
               <TableCell>
                 <Grid container justifyContent="center">
                   <Grid item>
