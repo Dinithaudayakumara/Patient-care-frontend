@@ -9,44 +9,25 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-
-const rows = [
-  {
-    appointmentid: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    date: "12/12/2022",
-    time: "09.30AM",
-  },
-  {
-    appointmentid: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    date: "12/12/2022",
-    time: "09.30AM",
-  },
-  {
-    appointmentid: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    date: "12/12/2022",
-    time: "09.30AM",
-  },
-  {
-    appointmentid: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    date: "12/12/2022",
-    time: "09.30AM",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPatients } from "../../store/actions/patientAction";
 
 export default function BasicTable() {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (allPatientList.length === 0) {
+      dispatch(getAllPatients());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const { allPatientList } = useSelector((store) => store.patientReducer);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -69,13 +50,13 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, key) => (
+          {allPatientList.map((val, key) => (
             <TableRow key={key} hover>
-              <TableCell>{row.appointmentid}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.number}</TableCell>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.time}</TableCell>
+              <TableCell>{val._id}</TableCell>
+              <TableCell>{val.firstName + " " + val.lastName}</TableCell>
+              <TableCell>{val.mobileNumber}</TableCell>
+              <TableCell>{val.dateofBath}</TableCell>
+              <TableCell>{val.time}</TableCell>
               <TableCell>
                 <Grid container justifyContent="center" spacing={2}>
                   <Grid item>
