@@ -10,7 +10,6 @@ import {
   TableRow,
 } from "@mui/material";
 import React, { useEffect } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,11 +66,6 @@ export default function BasicTable() {
                   <Grid item>
                     <IconButton color="secondary" onClick={handleClickOpen}>
                       <EditOutlinedIcon style={{ color: "silver" }} />
-                    </IconButton>
-                  </Grid>
-                  <Grid item>
-                    <IconButton color="primary" onClick={handleClickOpen}>
-                      <DeleteIcon style={{ color: "red" }} />
                     </IconButton>
                   </Grid>
                 </Grid>

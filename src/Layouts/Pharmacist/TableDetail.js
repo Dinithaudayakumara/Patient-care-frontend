@@ -6,43 +6,24 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import PatientPrescriptionPopDialogbox from "./PatientPrescriptionPopDialogbox";
-
-const rows = [
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    date: "12/12/2022",
-    doctorname: "Dr.Devid",
-  },
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    date: "12/12/2022",
-    doctorname: "Dr.Devid",
-  },
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    date: "12/12/2022",
-    doctorname: "Dr.Devid",
-  },
-  {
-    id: "#KFH123",
-    name: "Olive G.",
-    number: "075457545",
-    date: "12/12/2022",
-    doctorname: "Dr.Devid",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPatients } from "../../store/actions/patientAction";
 
 export default function BasicTable() {
+  const dispatch = useDispatch();
   const [selectedRow, setSelectedRow] = React.useState(null);
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    if (allPatientList.length === 0) {
+      dispatch(getAllPatients());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const { allPatientList } = useSelector((store) => store.patientReducer);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -60,12 +41,11 @@ export default function BasicTable() {
             <TableCell>Name</TableCell>
             <TableCell>T.P</TableCell>
             <TableCell>Date</TableCell>
-            <TableCell>Checked Doctor Name</TableCell>
             <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((val, key) => (
+          {allPatientList.map((val, key) => (
             <TableRow
               key={key}
               hover
@@ -79,11 +59,10 @@ export default function BasicTable() {
                   : {}
               }
             >
-              <TableCell>{val.id}</TableCell>
-              <TableCell>{val.name}</TableCell>
-              <TableCell>{val.number}</TableCell>
-              <TableCell>{val.date}</TableCell>
-              <TableCell>{val.doctorname}</TableCell>
+              <TableCell>{val._id}</TableCell>
+              <TableCell>{val.firstName + " " + val.lastName}</TableCell>
+              <TableCell>{val.mobileNumber}</TableCell>
+              <TableCell>{val.dateofBath}</TableCell>
               <TableCell></TableCell>
             </TableRow>
           ))}
