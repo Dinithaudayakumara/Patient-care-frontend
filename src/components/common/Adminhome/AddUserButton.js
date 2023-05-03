@@ -5,7 +5,7 @@ export default function AddUserButton({ doctorOnClick }) {
   return (
     <div>
       <Button variant="contained" onClick={doctorOnClick}>
-        Add New{" "}
+        Add New
       </Button>
     </div>
   );

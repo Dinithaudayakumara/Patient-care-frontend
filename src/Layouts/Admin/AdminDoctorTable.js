@@ -1,6 +1,5 @@
 import {
   Dialog,
-  DialogTitle,
   Grid,
   IconButton,
   Table,
@@ -9,22 +8,34 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useSelector } from "react-redux";
+import AdminDoctorTableDelete from "../Admindoctorpage/AdminDoctorTableDelete";
+import AdminDoctorTableEdit from "../Admindoctorpage/AdminDoctorTableEdit";
 
 export default function BasicTable() {
   const { allDoctorList } = useSelector((store) => store.doctorReducer);
-  const [open, setOpen] = React.useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpen = (type) => {
+    if (type === "edit") {
+      setIsEditOpen(true);
+    } else if (type === "delete") {
+      setIsDeleteOpen(true);
+    }
+    setIsDialogOpen(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setIsDialogOpen(false);
+    setIsEditOpen(false);
+    setIsDeleteOpen(false);
   };
+
   return (
     <div style={{ paddingLeft: 10, paddingRight: 10 }}>
       <Table>
@@ -47,12 +58,18 @@ export default function BasicTable() {
               <TableCell>
                 <Grid container justifyContent="flex-start" spacing={2}>
                   <Grid item>
-                    <IconButton color="secondary" onClick={handleClickOpen}>
+                    <IconButton
+                      color="secondary"
+                      onClick={() => handleClickOpen("edit")}
+                    >
                       <EditOutlinedIcon style={{ color: "silver" }} />
                     </IconButton>
                   </Grid>
                   <Grid item>
-                    <IconButton color="primary" onClick={handleClickOpen}>
+                    <IconButton
+                      color="primary"
+                      onClick={() => handleClickOpen("delete")}
+                    >
                       <DeleteIcon style={{ color: "red" }} />
                     </IconButton>
                   </Grid>
@@ -63,12 +80,28 @@ export default function BasicTable() {
         </TableBody>
       </Table>
       <Dialog
-        open={open}
+        open={isDialogOpen}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
+        maxWidth="xl"
+        PaperProps={{
+          style: {
+            width: isEditOpen && isDeleteOpen ? "70%" : "50%",
+            height: isEditOpen && isDeleteOpen ? "55%" : "50%",
+            maxHeight: "none",
+          },
+        }}
       >
-        <DialogTitle></DialogTitle>
+        {isEditOpen && (
+          <AdminDoctorTableEdit isOpen={isEditOpen} setIsOpen={setIsEditOpen} />
+        )}
+        {isDeleteOpen && (
+          <AdminDoctorTableDelete
+            isOpen={isDeleteOpen}
+            setIsOpen={setIsDeleteOpen}
+          />
+        )}
       </Dialog>
     </div>
   );
