@@ -6,7 +6,6 @@ import UpdateUserButton from "../../components/common/Adminhome/UpdateUserButton
 export default function AdminDoctorTableEdit() {
   return (
     <div>
-      {" "}
       <Typography
         align="center"
         sx={{ fontSize: 29, paddingTop: 1, color: "#017CF1" }}

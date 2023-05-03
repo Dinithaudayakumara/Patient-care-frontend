@@ -3,14 +3,14 @@ import React from "react";
 import AddUserTextBox from "../../components/common/Adminhome/AddUserTextBox";
 import UpdateUserButton from "../../components/common/Adminhome/UpdateUserButton";
 
-export default function AdminPatientTableEdit() {
+export default function AdminPharmacistTableEdit() {
   return (
     <div>
       <Typography
         align="center"
         sx={{ fontSize: 29, paddingTop: 1, color: "#017CF1" }}
       >
-        <b>Edit Patient</b>
+        <b>Edit Pharmacist</b>
       </Typography>
       <Typography align="center" sx={{ fontSize: 13, paddingTop: 1 }}>
         Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -23,10 +23,7 @@ export default function AdminPatientTableEdit() {
           <AddUserTextBox name="Name" placeholder="Enter your Name" />
           <AddUserTextBox name="Email" placeholder="Enter your email address" />
           <AddUserTextBox name="Password" placeholder="Enter Your Password" />
-          <AddUserTextBox
-            name="Phone Number "
-            placeholder="Enter your  Phone Number"
-          />
+          <AddUserTextBox name="Location " placeholder="Enter your Location" />
         </Grid>
         <Grid item pr={17} pt={5} sx={{ textAlign: "center" }}>
           <Avatar sx={{ width: 180, height: 180 }}></Avatar>

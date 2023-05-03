@@ -3,7 +3,7 @@ import React from "react";
 import YesDeleteButton from "../../components/common/Adminhome/YesDeleteButton";
 import NoDeleteButton from "../../components/common/Adminhome/NoDeleteButton";
 
-export default function AdminDoctorTableDelete() {
+export default function AdminPharmacistTableDelete() {
   return (
     <div>
       <Typography
