@@ -2,9 +2,9 @@ import { Grid, Typography } from "@mui/material";
 import React from "react";
 import AddUserTextBox from "../../components/common/Adminhome/AddUserTextBox";
 import AddUserDetailTextBox from "../../components/Docterhomepage/AddUserDetailTextBox";
-import AddUserButton from "../../components/common/Adminhome/AddUserButton";
+import UpdateUserButton from "../../components/common/Adminhome/UpdateUserButton";
 
-export default function AddNewPatient() {
+export default function UpdatePatientPopDialogbox() {
   return (
     <div>
       <Typography align="center" sx={{ fontSize: 29, paddingTop: 1 }}>
@@ -31,7 +31,7 @@ export default function AddNewPatient() {
             placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type  "
           />
           <Grid pl={1} pt={3}>
-            <AddUserButton />
+            <UpdateUserButton />
           </Grid>
         </Grid>
       </Grid>

@@ -1,6 +1,5 @@
 import {
   Dialog,
-  DialogTitle,
   Grid,
   IconButton,
   Table,
@@ -9,15 +8,18 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPatients } from "../../store/actions/patientAction";
+// import EditPatientPopDialogbox from "./EditPatientPopDialogbox";l
+import PatientFeedbackPopDialogbox from "./PatientFeedbackPopDialogbox";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState(null);
+  const [openEdit, setOpenEdit] = useState(false);
 
   useEffect(() => {
     if (allPatientList.length === 0) {
@@ -28,13 +30,10 @@ export default function BasicTable() {
 
   const { allPatientList } = useSelector((store) => store.patientReducer);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpenEdit = () => {
+    setOpenEdit(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   return (
     <div style={{ paddingLeft: 50 }}>
       <Table>
@@ -50,7 +49,19 @@ export default function BasicTable() {
         </TableHead>
         <TableBody>
           {allPatientList.map((val, key) => (
-            <TableRow key={key} hover>
+            <TableRow
+              key={key}
+              hover
+              onClick={() => {
+                setSelectedRow(val);
+                handleClickOpenEdit();
+              }}
+              style={
+                selectedRow === val
+                  ? { backgroundColor: "#D7EBFF", color: "white" }
+                  : {}
+              }
+            >
               <TableCell>{val._id}</TableCell>
               <TableCell>{val.firstName + " " + val.lastName}</TableCell>
               <TableCell>{val.mobileNumber}</TableCell>
@@ -59,12 +70,17 @@ export default function BasicTable() {
               <TableCell>
                 <Grid container justifyContent="center" spacing={2}>
                   <Grid item>
-                    <IconButton color="secondary" onClick={handleClickOpen}>
+                    <IconButton color="secondary">
                       <PictureAsPdfIcon style={{ color: "red" }} />
                     </IconButton>
                   </Grid>
                   <Grid item>
-                    <IconButton color="secondary" onClick={handleClickOpen}>
+                    <IconButton
+                      color="secondary"
+                      onClick={() => {
+                        setOpenEdit(true);
+                      }}
+                    >
                       <EditOutlinedIcon style={{ color: "silver" }} />
                     </IconButton>
                   </Grid>
@@ -76,13 +92,20 @@ export default function BasicTable() {
       </Table>
 
       <Dialog
-        open={open}
-        keepMounted
-        onClose={handleClose}
-        aria-describedby="alert-dialog-slide-description"
+        open={openEdit}
+        onClose={() => setOpenEdit(false)}
+        maxWidth="xl"
+        PaperProps={{
+          style: {
+            width: "55%",
+            height: "75%",
+          },
+        }}
       >
-        <DialogTitle></DialogTitle>
+        <PatientFeedbackPopDialogbox isOpen={openEdit} setIsOpen={setOpenEdit} />
       </Dialog>
+
+      {/* <PatientFeedbackPopDialogbox /> */}
     </div>
   );
 }
