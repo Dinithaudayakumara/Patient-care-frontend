@@ -8,35 +8,47 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AdminPatientTableEdit from "../Adminpatientpage/AdminPatientTableEdit";
-import AdminPatientTableDelete from "../Adminpatientpage/AdminPatientTableDelete";
+
+import {
+  clearPatientUpdateStatus,
+  getAllPatients,
+  setAdminSelectedPatient,
+} from "../../store/actions/patientAction";
 
 export default function BasicTable() {
-  const { allPatientList } = useSelector((store) => store.patientReducer);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { allPatientList, patientUpdateStatus } = useSelector(
+    (store) => store.patientReducer
+  );
 
-  const handleClickOpen = (type) => {
-    if (type === "edit") {
-      setIsEditOpen(true);
-    } else if (type === "delete") {
-      setIsDeleteOpen(true);
-    }
-    setIsDialogOpen(true);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+    dispatch(clearPatientUpdateStatus());
   };
 
   const handleClose = () => {
-    setIsDialogOpen(false);
-    setIsEditOpen(false);
-    setIsDeleteOpen(false);
+    setOpen(false);
   };
+
+  const setValue = (patient) => {
+    dispatch(setAdminSelectedPatient(patient));
+  };
+
+  useEffect(() => {
+    if (patientUpdateStatus === "completed") {
+      dispatch(getAllPatients());
+    }
+  }, [dispatch, patientUpdateStatus]);
+
   return (
-    <div>
+    <div style={{ paddingLeft: 30}}>
       <Table>
         <TableHead>
           <TableRow>
@@ -59,7 +71,10 @@ export default function BasicTable() {
                   <Grid item>
                     <IconButton
                       color="secondary"
-                      onClick={() => handleClickOpen("edit")}
+                      onClick={() => {
+                        handleClickOpen();
+                        setValue(val);
+                      }}
                     >
                       <EditOutlinedIcon style={{ color: "silver" }} />
                     </IconButton>
@@ -78,32 +93,22 @@ export default function BasicTable() {
           ))}
         </TableBody>
       </Table>
+
       <Dialog
-        open={isDialogOpen}
+        open={open}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
         maxWidth="xl"
         PaperProps={{
           style: {
-            width: isEditOpen && isDeleteOpen ? "70%" : "50%",
-            height: isEditOpen && isDeleteOpen ? "55%" : "50%",
+            width: "55%",
+            height: "65%",
             maxHeight: "none",
           },
         }}
       >
-        {isEditOpen && (
-          <AdminPatientTableEdit
-            isOpen={isEditOpen}
-            setIsOpen={setIsEditOpen}
-          />
-        )}
-        {isDeleteOpen && (
-          <AdminPatientTableDelete
-            isOpen={isDeleteOpen}
-            setIsOpen={setIsDeleteOpen}
-          />
-        )}
+        <AdminPatientTableEdit handleClose={handleClose} />
       </Dialog>
     </div>
   );

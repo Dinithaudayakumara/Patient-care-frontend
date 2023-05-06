@@ -2,8 +2,27 @@ import { Avatar, Grid, Typography } from "@mui/material";
 import React from "react";
 import AddUserTextBox from "../../components/common/Adminhome/AddUserTextBox";
 import UpdateUserButton from "../../components/common/Adminhome/UpdateUserButton";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setAdminSelectedDoctor,
+  updateDoctor,
+} from "../../store/actions/doctorAction";
 
-export default function AdminDoctorTableEdit() {
+export default function AdminDoctorTableEdit({ handleClose }) {
+  const dispatch = useDispatch();
+  const { adminSelectedDoctor } = useSelector((store) => store.doctorReducer);
+  console.log(adminSelectedDoctor);
+  const handleChange = (value, name) => {
+    dispatch(setAdminSelectedDoctor({ ...adminSelectedDoctor, [name]: value }));
+    console.log(name);
+    console.log(value);
+  };
+
+  const handleDoctorUpdate = () => {
+    dispatch(updateDoctor(adminSelectedDoctor));
+    handleClose();
+  };
+
   return (
     <div>
       <Typography
@@ -20,12 +39,33 @@ export default function AdminDoctorTableEdit() {
       </Typography>
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item pl={5}>
-          <AddUserTextBox name="Name" placeholder="Enter your Name" />
-          <AddUserTextBox name="Email" placeholder="Enter your email address" />
-          <AddUserTextBox name="Password" placeholder="Enter Your Password" />
           <AddUserTextBox
-            name="Type of Doctor "
+            fieldname="Name"
             placeholder="Enter your Name"
+            value={adminSelectedDoctor.firstName}
+            name="firstName"
+            handleChange={handleChange}
+          />
+          <AddUserTextBox
+            fieldname="Email"
+            placeholder="Enter your email address"
+            value={adminSelectedDoctor.email}
+            name="email"
+            handleChange={handleChange}
+          />
+          <AddUserTextBox
+            fieldname="Password"
+            placeholder="Enter Your Password"
+            value={adminSelectedDoctor.password}
+            name="password"
+            handleChange={handleChange}
+          />
+          <AddUserTextBox
+            fieldname="Type of Doctor "
+            placeholder="Enter your Name"
+            value={adminSelectedDoctor.specialty}
+            name="specialty"
+            handleChange={handleChange}
           />
         </Grid>
         <Grid item pr={17} pt={5} sx={{ textAlign: "center" }}>
@@ -33,8 +73,8 @@ export default function AdminDoctorTableEdit() {
           <Typography pt={2} sx={{ fontSize: 13 }}>
             Add Profile Picture
           </Typography>
-          <div style={{ paddingTop: 60 }}>
-            <UpdateUserButton />
+          <div style={{ paddingTop: 45 }}>
+            <UpdateUserButton handleDoctorUpdate={handleDoctorUpdate} />
           </div>
         </Grid>
       </Grid>

@@ -13,8 +13,8 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPatients } from "../../store/actions/patientAction";
-// import EditPatientPopDialogbox from "./EditPatientPopDialogbox";l
-import PatientFeedbackPopDialogbox from "./PatientFeedbackPopDialogbox";
+import EditPatientPopDialogbox from "./EditPatientPopDialogbox";
+// import PatientFeedbackPopDialogbox from "./PatientFeedbackPopDialogbox";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
@@ -102,7 +102,7 @@ export default function BasicTable() {
           },
         }}
       >
-        <PatientFeedbackPopDialogbox isOpen={openEdit} setIsOpen={setOpenEdit} />
+        <EditPatientPopDialogbox isOpen={openEdit} setIsOpen={setOpenEdit} />
       </Dialog>
 
       {/* <PatientFeedbackPopDialogbox /> */}

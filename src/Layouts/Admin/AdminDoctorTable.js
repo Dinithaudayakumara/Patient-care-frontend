@@ -8,33 +8,44 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { useSelector } from "react-redux";
-import AdminDoctorTableDelete from "../Admindoctorpage/AdminDoctorTableDelete";
+import { useDispatch, useSelector } from "react-redux";
 import AdminDoctorTableEdit from "../Admindoctorpage/AdminDoctorTableEdit";
 
-export default function BasicTable() {
-  const { allDoctorList } = useSelector((store) => store.doctorReducer);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+import {
+  clearDoctorUpdateStatus,
+  getAllDoctors,
+  setAdminSelectedDoctor,
+} from "../../store/actions/doctorAction";
 
-  const handleClickOpen = (type) => {
-    if (type === "edit") {
-      setIsEditOpen(true);
-    } else if (type === "delete") {
-      setIsDeleteOpen(true);
-    }
-    setIsDialogOpen(true);
+export default function BasicTable() {
+  const dispatch = useDispatch();
+  const { allDoctorList, doctorUpdateStatus } = useSelector(
+    (store) => store.doctorReducer
+  );
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+    dispatch(clearDoctorUpdateStatus());
   };
 
   const handleClose = () => {
-    setIsDialogOpen(false);
-    setIsEditOpen(false);
-    setIsDeleteOpen(false);
+    setOpen(false);
   };
+
+  const setValue = (doctor) => {
+    dispatch(setAdminSelectedDoctor(doctor));
+  };
+
+  useEffect(() => {
+    if (doctorUpdateStatus === "completed") {
+      dispatch(getAllDoctors());
+    }
+  }, [dispatch, doctorUpdateStatus]);
 
   return (
     <div style={{ paddingLeft: 10, paddingRight: 10 }}>
@@ -52,7 +63,7 @@ export default function BasicTable() {
           {allDoctorList.map((val, key) => (
             <TableRow key={key} hover>
               <TableCell>{val._id}</TableCell>
-              <TableCell>{val.firstName + " " + val.lastName}</TableCell>
+              <TableCell>{val.firstName}</TableCell>
               <TableCell>{val.mobileNumber}</TableCell>
               <TableCell>{val.specialty}</TableCell>
               <TableCell>
@@ -60,16 +71,16 @@ export default function BasicTable() {
                   <Grid item>
                     <IconButton
                       color="secondary"
-                      onClick={() => handleClickOpen("edit")}
+                      onClick={() => {
+                        handleClickOpen();
+                        setValue(val);
+                      }}
                     >
                       <EditOutlinedIcon style={{ color: "silver" }} />
                     </IconButton>
                   </Grid>
                   <Grid item>
-                    <IconButton
-                      color="primary"
-                      onClick={() => handleClickOpen("delete")}
-                    >
+                    <IconButton color="primary">
                       <DeleteIcon style={{ color: "red" }} />
                     </IconButton>
                   </Grid>
@@ -80,28 +91,20 @@ export default function BasicTable() {
         </TableBody>
       </Table>
       <Dialog
-        open={isDialogOpen}
+        open={open}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
         maxWidth="xl"
         PaperProps={{
           style: {
-            width: isEditOpen && isDeleteOpen ? "70%" : "50%",
-            height: isEditOpen && isDeleteOpen ? "55%" : "50%",
+            width: "55%",
+            height: "65%",
             maxHeight: "none",
           },
         }}
       >
-        {isEditOpen && (
-          <AdminDoctorTableEdit isOpen={isEditOpen} setIsOpen={setIsEditOpen} />
-        )}
-        {isDeleteOpen && (
-          <AdminDoctorTableDelete
-            isOpen={isDeleteOpen}
-            setIsOpen={setIsDeleteOpen}
-          />
-        )}
+        <AdminDoctorTableEdit handleClose={handleClose} />
       </Dialog>
     </div>
   );

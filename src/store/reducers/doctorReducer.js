@@ -3,6 +3,8 @@ import * as Actions from "../actions/doctorAction";
 const inisialState = {
   getAllDoctorListLoading: "notStarted",
   allDoctorList: [],
+  adminSelectedDoctor: {},
+  doctorUpdateStatus: "notStarted",
 };
 
 const doctorReducer = (state = inisialState, action) => {
@@ -24,6 +26,18 @@ const doctorReducer = (state = inisialState, action) => {
         getAllDoctorListLoading: "fail",
         allDoctorList: [],
       };
+
+    case Actions.SET_ADMIN_SELECTED_DOCTOR:
+      return {
+        ...state,
+        adminSelectedDoctor: action.payload,
+      };
+
+    case Actions.UPDATE_DOCTOR_SUCESS:
+      return { ...state, doctorUpdateStatus: "completed" };
+
+    case Actions.CLEAR_DOCTOR_UPDATE_STATUS:
+      return { ...state, doctorUpdateStatus: "notStarted" };
 
     default:
       return state;

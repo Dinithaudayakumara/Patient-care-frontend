@@ -17,7 +17,6 @@ export default function AdminUserType({ type, image, route }) {
           borderRadius: "20%", // Add border-radius property to curve the edges
           border: "2px solid black", // Add border property to set border color and width
         }}
-        onClick={console.log("Hi")}
       >
         <Avatar alt="Remy Sharp" src={image} sx={{ width: 80, height: 80 }} />
         <Typography>{type}</Typography>

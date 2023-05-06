@@ -3,6 +3,8 @@ import * as Actions from "../actions/patientAction";
 const inisialState = {
   getAllPatientListLoading: "notStarted",
   allPatientList: [],
+  adminSelectedPatient: {},
+  patientUpdateStatus: "notStarted",
 };
 
 const patientReducer = (state = inisialState, action) => {
@@ -24,6 +26,18 @@ const patientReducer = (state = inisialState, action) => {
         getAllPatientListLoading: "fail",
         allPatientList: [],
       };
+
+    case Actions.SET_ADMIN_SELECTED_PATIENT:
+      return {
+        ...state,
+        adminSelectedPatient: action.payload,
+      };
+
+    case Actions.UPDATE_PATIENT_SUCESS:
+      return { ...state, patientUpdateStatus: "completed" };
+
+    case Actions.CLEAR_PATIENT_UPDATE_STATUS:
+      return { ...state, patientUpdateStatus: "notStarted" };
 
     default:
       return state;
