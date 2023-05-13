@@ -21,10 +21,26 @@ export default function PatientAddNewDialogBox() {
 
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item pl={5}>
-          <AddUserTextBox name="Name" placeholder="Enter your Name" />
-          <AddUserTextBox name="Email" placeholder="Enter your email address" />
-          <AddUserTextBox name="Password" placeholder="Enter Your Password" />
-          <AddUserTextBox name="Phone Number" placeholder="Enter your Number" />
+          <AddUserTextBox
+            name="Name"
+            placeholder="Enter your Name"
+            fieldname="Name"
+          />
+          <AddUserTextBox
+            name="Email"
+            placeholder="Enter your email address"
+            fieldname="Email"
+          />
+          <AddUserTextBox
+            name="Password"
+            placeholder="Enter Your Password"
+            fieldname="Password"
+          />
+          <AddUserTextBox
+            name="Phone Number"
+            placeholder="Enter your Number"
+            fieldname="Phone Number"
+          />
         </Grid>
         <Grid item pr={17} pt={5} sx={{ textAlign: "center" }}>
           <Avatar sx={{ width: 180, height: 180 }}></Avatar>

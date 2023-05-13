@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import AdminDoctorTableEdit from "../Admindoctorpage/AdminDoctorTableEdit";
+import AdminDoctorTableDelete from "../Admindoctorpage/AdminDoctorTableDelete";
 
 import {
   clearDoctorUpdateStatus,
@@ -26,16 +27,8 @@ export default function BasicTable() {
     (store) => store.doctorReducer
   );
 
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-    dispatch(clearDoctorUpdateStatus());
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   const setValue = (doctor) => {
     dispatch(setAdminSelectedDoctor(doctor));
@@ -72,15 +65,21 @@ export default function BasicTable() {
                     <IconButton
                       color="secondary"
                       onClick={() => {
-                        handleClickOpen();
+                        setOpenEdit(true);
                         setValue(val);
+                        dispatch(clearDoctorUpdateStatus());
                       }}
                     >
                       <EditOutlinedIcon style={{ color: "silver" }} />
                     </IconButton>
                   </Grid>
                   <Grid item>
-                    <IconButton color="primary">
+                    <IconButton
+                      color="primary"
+                      onClick={() => {
+                        setOpenDelete(true);
+                      }}
+                    >
                       <DeleteIcon style={{ color: "red" }} />
                     </IconButton>
                   </Grid>
@@ -91,20 +90,41 @@ export default function BasicTable() {
         </TableBody>
       </Table>
       <Dialog
-        open={open}
+        open={openEdit}
         keepMounted
-        onClose={handleClose}
+        onClose={() => {
+          setOpenEdit(false);
+        }}
         aria-describedby="alert-dialog-slide-description"
         maxWidth="xl"
         PaperProps={{
           style: {
             width: "55%",
             height: "65%",
-            maxHeight: "none",
           },
         }}
       >
-        <AdminDoctorTableEdit handleClose={handleClose} />
+        {openEdit && (
+          <AdminDoctorTableEdit isOpen={openEdit} setIsOpen={setOpenEdit} />
+        )}
+      </Dialog>
+
+      <Dialog
+        open={openDelete}
+        keepMounted
+        onClose={() => {
+          setOpenDelete(false);
+        }}
+        aria-describedby="alert-dialog-slide-description"
+        maxWidth="xl"
+        PaperProps={{
+          style: {
+            width: "35%",
+            height: "45%",
+          },
+        }}
+      >
+        <AdminDoctorTableDelete isOpen={openDelete} setIsOpen={setOpenDelete} />
       </Dialog>
     </div>
   );

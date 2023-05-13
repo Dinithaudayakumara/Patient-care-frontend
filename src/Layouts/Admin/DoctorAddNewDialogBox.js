@@ -21,12 +21,25 @@ export default function DoctorAddNewDialogBox() {
 
       <Grid container justifyContent="space-between" alignItems="center">
         <Grid item pl={5}>
-          <AddUserTextBox name="Name" placeholder="Enter your Name" />
-          <AddUserTextBox name="Email" placeholder="Enter your email address" />
-          <AddUserTextBox name="Password" placeholder="Enter Your Password" />
+          <AddUserTextBox
+            name="Name"
+            placeholder="Enter your Name"
+            fieldname="Name"
+          />
+          <AddUserTextBox
+            name="Email"
+            placeholder="Enter your email address"
+            fieldname="Email"
+          />
+          <AddUserTextBox
+            name="Password"
+            placeholder="Enter Your Password"
+            fieldname="Password"
+          />
           <AddUserTextBox
             name="Type of Doctor "
             placeholder="Enter your Name"
+            fieldname="Type of Doctor "
           />
         </Grid>
         <Grid item pr={17} pt={5} sx={{ textAlign: "center" }}>
@@ -34,7 +47,7 @@ export default function DoctorAddNewDialogBox() {
           <Typography pt={4} sx={{ fontSize: 13 }}>
             Add Profile Picture
           </Typography>
-          <div style={{ paddingTop: 60 }}>
+          <div style={{ paddingTop: 50 }}>
             <AddUserButton />
           </div>
         </Grid>

@@ -13,6 +13,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import AdminPatientTableEdit from "../Adminpatientpage/AdminPatientTableEdit";
+import AdminPatientTableDelete from "../Adminpatientpage/AdminPatientTableDelete";
 
 import {
   clearPatientUpdateStatus,
@@ -26,16 +27,8 @@ export default function BasicTable() {
     (store) => store.patientReducer
   );
 
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-    dispatch(clearPatientUpdateStatus());
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   const setValue = (patient) => {
     dispatch(setAdminSelectedPatient(patient));
@@ -48,7 +41,7 @@ export default function BasicTable() {
   }, [dispatch, patientUpdateStatus]);
 
   return (
-    <div style={{ paddingLeft: 30}}>
+    <div style={{ paddingLeft: 30 }}>
       <Table>
         <TableHead>
           <TableRow>
@@ -72,8 +65,9 @@ export default function BasicTable() {
                     <IconButton
                       color="secondary"
                       onClick={() => {
-                        handleClickOpen();
+                        setOpenEdit(true);
                         setValue(val);
+                        dispatch(clearPatientUpdateStatus());
                       }}
                     >
                       <EditOutlinedIcon style={{ color: "silver" }} />
@@ -82,7 +76,9 @@ export default function BasicTable() {
                   <Grid item>
                     <IconButton
                       color="primary"
-                      onClick={() => handleClickOpen("delete")}
+                      onClick={() => {
+                        setOpenDelete(true);
+                      }}
                     >
                       <DeleteIcon style={{ color: "red" }} />
                     </IconButton>
@@ -95,20 +91,44 @@ export default function BasicTable() {
       </Table>
 
       <Dialog
-        open={open}
+        open={openEdit}
         keepMounted
-        onClose={handleClose}
+        onClose={() => {
+          setOpenEdit(false);
+        }}
         aria-describedby="alert-dialog-slide-description"
         maxWidth="xl"
         PaperProps={{
           style: {
             width: "55%",
             height: "65%",
-            maxHeight: "none",
           },
         }}
       >
-        <AdminPatientTableEdit handleClose={handleClose} />
+        {openEdit && (
+          <AdminPatientTableEdit isOpen={openEdit} setIsOpen={setOpenEdit} />
+        )}
+      </Dialog>
+
+      <Dialog
+        open={openDelete}
+        keepMounted
+        onClose={() => {
+          setOpenDelete(false);
+        }}
+        aria-describedby="alert-dialog-slide-description"
+        maxWidth="xl"
+        PaperProps={{
+          style: {
+            width: "35%",
+            height: "45%",
+          },
+        }}
+      >
+        <AdminPatientTableDelete
+          isOpen={openDelete}
+          setIsOpen={setOpenDelete}
+        />
       </Dialog>
     </div>
   );

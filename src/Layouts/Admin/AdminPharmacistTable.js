@@ -8,33 +8,37 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AdminPharmacistTableEdit from "../Adminpharmacistpage/AdminPharmacistTableEdit";
 import AdminPharmacistTableDelete from "../Admindoctorpage/AdminDoctorTableDelete";
 
+import {
+  clearPharmacistUpdateStatus,
+  getAllPharmacists,
+  setAdminSelectedPharmacist,
+} from "../../store/actions/pharmacistAction";
+
 export default function BasicTable() {
-  const { allPharmacistList } = useSelector((store) => store.pharmacistReducer);
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { allPharmacistList, pharmacistUpdateStatus } = useSelector(
+    (store) => store.pharmacistReducer
+  );
 
-  const handleClickOpen = (type) => {
-    if (type === "edit") {
-      setIsEditOpen(true);
-    } else if (type === "delete") {
-      setIsDeleteOpen(true);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+
+  const setValue = (pharmacist) => {
+    dispatch(setAdminSelectedPharmacist(pharmacist));
+  };
+
+  useEffect(() => {
+    if (pharmacistUpdateStatus === "completed") {
+      dispatch(getAllPharmacists());
     }
-    setIsDialogOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsDialogOpen(false);
-    setIsEditOpen(false);
-    setIsDeleteOpen(false);
-  };
+  }, [dispatch, pharmacistUpdateStatus]);
 
   return (
     <div>
@@ -60,7 +64,11 @@ export default function BasicTable() {
                   <Grid item>
                     <IconButton
                       color="secondary"
-                      onClick={() => handleClickOpen("edit")}
+                      onClick={() => {
+                        setOpenEdit(true);
+                        setValue(val);
+                        dispatch(clearPharmacistUpdateStatus());
+                      }}
                     >
                       <EditOutlinedIcon style={{ color: "silver" }} />
                     </IconButton>
@@ -68,7 +76,9 @@ export default function BasicTable() {
                   <Grid item>
                     <IconButton
                       color="primary"
-                      onClick={() => handleClickOpen("delete")}
+                      onClick={() => {
+                        setOpenDelete(true);
+                      }}
                     >
                       <DeleteIcon style={{ color: "red" }} />
                     </IconButton>
@@ -81,31 +91,44 @@ export default function BasicTable() {
       </Table>
 
       <Dialog
-        open={isDialogOpen}
+        open={openEdit}
         keepMounted
-        onClose={handleClose}
+        onClose={() => {
+          setOpenEdit(false);
+        }}
         aria-describedby="alert-dialog-slide-description"
         maxWidth="xl"
         PaperProps={{
           style: {
-            width: isEditOpen && isDeleteOpen ? "70%" : "50%",
-            height: isEditOpen && isDeleteOpen ? "55%" : "50%",
-            maxHeight: "none",
+            width: "55%",
+            height: "65%",
           },
         }}
       >
-        {isEditOpen && (
-          <AdminPharmacistTableEdit
-            isOpen={isEditOpen}
-            setIsOpen={setIsEditOpen}
-          />
+        {openEdit && (
+          <AdminPharmacistTableEdit isOpen={openEdit} setIsOpen={setOpenEdit} />
         )}
-        {isDeleteOpen && (
-          <AdminPharmacistTableDelete
-            isOpen={isDeleteOpen}
-            setIsOpen={setIsDeleteOpen}
-          />
-        )}
+      </Dialog>
+
+      <Dialog
+        open={openDelete}
+        keepMounted
+        onClose={() => {
+          setOpenDelete(false);
+        }}
+        aria-describedby="alert-dialog-slide-description"
+        maxWidth="xl"
+        PaperProps={{
+          style: {
+            width: "35%",
+            height: "45%",
+          },
+        }}
+      >
+        <AdminPharmacistTableDelete
+          isOpen={openDelete}
+          setIsOpen={setOpenDelete}
+        />
       </Dialog>
     </div>
   );
