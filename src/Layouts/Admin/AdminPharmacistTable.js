@@ -19,19 +19,24 @@ import {
   clearPharmacistUpdateStatus,
   getAllPharmacists,
   setAdminSelectedPharmacist,
+  updatePharmacist,
 } from "../../store/actions/pharmacistAction";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
-  const { allPharmacistList, pharmacistUpdateStatus } = useSelector(
-    (store) => store.pharmacistReducer
-  );
+  const { allPharmacistList, pharmacistUpdateStatus, adminSelectedPharmacist } =
+    useSelector((store) => store.pharmacistReducer);
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 
   const setValue = (pharmacist) => {
     dispatch(setAdminSelectedPharmacist(pharmacist));
+  };
+
+  const handleUpdate = () => {
+    dispatch(updatePharmacist(adminSelectedPharmacist));
+    setOpenEdit(false);
   };
 
   useEffect(() => {
@@ -106,7 +111,11 @@ export default function BasicTable() {
         }}
       >
         {openEdit && (
-          <AdminPharmacistTableEdit isOpen={openEdit} setIsOpen={setOpenEdit} />
+          <AdminPharmacistTableEdit
+            isOpen={openEdit}
+            setIsOpen={setOpenEdit}
+            handleUpdate={handleUpdate}
+          />
         )}
       </Dialog>
 

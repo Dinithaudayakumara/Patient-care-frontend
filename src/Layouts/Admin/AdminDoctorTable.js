@@ -19,19 +19,24 @@ import {
   clearDoctorUpdateStatus,
   getAllDoctors,
   setAdminSelectedDoctor,
+  updateDoctor,
 } from "../../store/actions/doctorAction";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
-  const { allDoctorList, doctorUpdateStatus } = useSelector(
-    (store) => store.doctorReducer
-  );
+  const { allDoctorList, doctorUpdateStatus, adminSelectedDoctor } =
+    useSelector((store) => store.doctorReducer);
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 
   const setValue = (doctor) => {
     dispatch(setAdminSelectedDoctor(doctor));
+  };
+
+  const handleUpdate = () => {
+    dispatch(updateDoctor(adminSelectedDoctor));
+    setOpenEdit(false);
   };
 
   useEffect(() => {
@@ -105,7 +110,11 @@ export default function BasicTable() {
         }}
       >
         {openEdit && (
-          <AdminDoctorTableEdit isOpen={openEdit} setIsOpen={setOpenEdit} />
+          <AdminDoctorTableEdit
+            isOpen={openEdit}
+            setIsOpen={setOpenEdit}
+            handleUpdate={handleUpdate}
+          />
         )}
       </Dialog>
 

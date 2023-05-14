@@ -19,19 +19,24 @@ import {
   clearPatientUpdateStatus,
   getAllPatients,
   setAdminSelectedPatient,
+  updatePatient,
 } from "../../store/actions/patientAction";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
-  const { allPatientList, patientUpdateStatus } = useSelector(
-    (store) => store.patientReducer
-  );
+  const { allPatientList, patientUpdateStatus, adminSelectedPatient } =
+    useSelector((store) => store.patientReducer);
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
 
   const setValue = (patient) => {
     dispatch(setAdminSelectedPatient(patient));
+  };
+
+  const handleUpdate = () => {
+    dispatch(updatePatient(adminSelectedPatient));
+    setOpenEdit(false);
   };
 
   useEffect(() => {
@@ -106,7 +111,11 @@ export default function BasicTable() {
         }}
       >
         {openEdit && (
-          <AdminPatientTableEdit isOpen={openEdit} setIsOpen={setOpenEdit} />
+          <AdminPatientTableEdit
+            isOpen={openEdit}
+            setIsOpen={setOpenEdit}
+            handleUpdate={handleUpdate}
+          />
         )}
       </Dialog>
 

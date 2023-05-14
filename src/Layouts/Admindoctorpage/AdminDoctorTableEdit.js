@@ -3,12 +3,9 @@ import React from "react";
 import AddUserTextBox from "../../components/common/Adminhome/AddUserTextBox";
 import UpdateUserButton from "../../components/common/Adminhome/UpdateUserButton";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setAdminSelectedDoctor,
-  updateDoctor,
-} from "../../store/actions/doctorAction";
+import { setAdminSelectedDoctor } from "../../store/actions/doctorAction";
 
-export default function AdminDoctorTableEdit({ handleClose }) {
+export default function AdminDoctorTableEdit({ handleUpdate }) {
   const dispatch = useDispatch();
   const { adminSelectedDoctor } = useSelector((store) => store.doctorReducer);
   console.log(adminSelectedDoctor);
@@ -16,11 +13,6 @@ export default function AdminDoctorTableEdit({ handleClose }) {
     dispatch(setAdminSelectedDoctor({ ...adminSelectedDoctor, [name]: value }));
     console.log(name);
     console.log(value);
-  };
-
-  const handleDoctorUpdate = () => {
-    dispatch(updateDoctor(adminSelectedDoctor));
-    handleClose();
   };
 
   return (
@@ -74,7 +66,7 @@ export default function AdminDoctorTableEdit({ handleClose }) {
             Add Profile Picture
           </Typography>
           <div style={{ paddingTop: 45 }}>
-            <UpdateUserButton handleDoctorUpdate={handleDoctorUpdate} />
+            <UpdateUserButton handleUpdate={handleUpdate} />
           </div>
         </Grid>
       </Grid>

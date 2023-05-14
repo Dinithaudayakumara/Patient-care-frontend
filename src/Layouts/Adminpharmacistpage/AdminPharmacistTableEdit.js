@@ -3,12 +3,9 @@ import React from "react";
 import AddUserTextBox from "../../components/common/Adminhome/AddUserTextBox";
 import UpdateUserButton from "../../components/common/Adminhome/UpdateUserButton";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setAdminSelectedPharmacist,
-  updatePharmacist,
-} from "../../store/actions/pharmacistAction";
+import { setAdminSelectedPharmacist } from "../../store/actions/pharmacistAction";
 
-export default function AdminPharmacistTableEdit({ handleClose }) {
+export default function AdminPharmacistTableEdit({ handleUpdate }) {
   const dispatch = useDispatch();
   const { adminSelectedPharmacist } = useSelector(
     (store) => store.pharmacistReducer
@@ -20,11 +17,6 @@ export default function AdminPharmacistTableEdit({ handleClose }) {
     );
     console.log(name);
     console.log(value);
-  };
-
-  const handlePharmacistUpdate = () => {
-    dispatch(updatePharmacist(adminSelectedPharmacist));
-    handleClose();
   };
 
   return (
@@ -78,7 +70,7 @@ export default function AdminPharmacistTableEdit({ handleClose }) {
             Add Profile Picture
           </Typography>
           <div style={{ paddingTop: 60 }}>
-            <UpdateUserButton handlePharmacistUpdate={handlePharmacistUpdate} />
+            <UpdateUserButton handleUpdate={handleUpdate} />
           </div>
         </Grid>
       </Grid>

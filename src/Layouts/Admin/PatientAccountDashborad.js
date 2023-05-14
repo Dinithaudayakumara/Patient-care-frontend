@@ -16,6 +16,7 @@ export default function PatientAccountDashborad() {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div>
       <AdminTopNav image={PatientPic} userType="Patient Details" />

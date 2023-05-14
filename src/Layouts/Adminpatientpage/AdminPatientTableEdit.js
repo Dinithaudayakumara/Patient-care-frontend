@@ -3,12 +3,9 @@ import React from "react";
 import AddUserTextBox from "../../components/common/Adminhome/AddUserTextBox";
 import UpdateUserButton from "../../components/common/Adminhome/UpdateUserButton";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setAdminSelectedPatient,
-  updatePatient,
-} from "../../store/actions/patientAction";
+import { setAdminSelectedPatient } from "../../store/actions/patientAction";
 
-export default function AdminPatientTableEdit({ handleClose }) {
+export default function AdminPatientTableEdit({ handleUpdate }) {
   const dispatch = useDispatch();
   const { adminSelectedPatient } = useSelector((store) => store.patientReducer);
   console.log(adminSelectedPatient);
@@ -18,11 +15,6 @@ export default function AdminPatientTableEdit({ handleClose }) {
     );
     console.log(name);
     console.log(value);
-  };
-
-  const handleDoctorUpdate = () => {
-    dispatch(updatePatient(adminSelectedPatient));
-    handleClose();
   };
 
   return (
@@ -64,8 +56,9 @@ export default function AdminPatientTableEdit({ handleClose }) {
           />
           <AddUserTextBox
             fieldname="Phone Number "
-            placeholder="Enter your  Phone Number"
+            placeholder="Enter your Phone Number"
             value={adminSelectedPatient.mobileNumber}
+            name="mobileNumber"
             handleChange={handleChange}
           />
         </Grid>
@@ -75,7 +68,7 @@ export default function AdminPatientTableEdit({ handleClose }) {
             Add Profile Picture
           </Typography>
           <div style={{ paddingTop: 60 }}>
-            <UpdateUserButton handleDoctorUpdate={handleDoctorUpdate} />
+            <UpdateUserButton handleUpdate={handleUpdate} />
           </div>
         </Grid>
       </Grid>
