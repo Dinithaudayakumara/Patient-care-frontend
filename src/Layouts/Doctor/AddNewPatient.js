@@ -19,15 +19,15 @@ export default function AddNewPatient() {
 
       <Grid container pt={5}>
         <Grid item xs={6} pl={3}>
-          <AddUserTextBox name="Date" placeholder="YYYY/MM/DD" />
+          <AddUserTextBox fieldname="Date" placeholder="YYYY/MM/DD" />
           <AddUserDetailTextBox
-            name="Prescription"
+            fieldname="Prescription"
             placeholder="Lorem Ipsum is simply dummy text "
           />
         </Grid>
         <Grid item xs={6}>
           <AddUserDetailTextBox
-            name="Prescription"
+            fieldname="Prescription"
             placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type  "
           />
           <Grid pl={1} pt={3}>

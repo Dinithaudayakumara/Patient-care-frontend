@@ -14,12 +14,15 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPatients } from "../../store/actions/patientAction";
 import EditPatientPopDialogbox from "./EditPatientPopDialogbox";
-// import PatientFeedbackPopDialogbox from "./PatientFeedbackPopDialogbox";
+import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
+import PatientFeedbackPopDialogbox from "./PatientFeedbackPopDialogbox";
 
 export default function BasicTable() {
   const dispatch = useDispatch();
   const [selectedRow, setSelectedRow] = React.useState(null);
+
   const [openEdit, setOpenEdit] = useState(false);
+  const [openFeedback, setOpenFeedback] = useState(false);
 
   useEffect(() => {
     if (allPatientList.length === 0) {
@@ -29,10 +32,6 @@ export default function BasicTable() {
   }, []);
 
   const { allPatientList } = useSelector((store) => store.patientReducer);
-
-  const handleClickOpenEdit = () => {
-    setOpenEdit(true);
-  };
 
   return (
     <div style={{ paddingLeft: 50 }}>
@@ -54,7 +53,6 @@ export default function BasicTable() {
               hover
               onClick={() => {
                 setSelectedRow(val);
-                handleClickOpenEdit();
               }}
               style={
                 selectedRow === val
@@ -84,6 +82,16 @@ export default function BasicTable() {
                       <EditOutlinedIcon style={{ color: "silver" }} />
                     </IconButton>
                   </Grid>
+                  <Grid item>
+                    <IconButton
+                      color="secondary"
+                      onClick={() => {
+                        setOpenFeedback(true);
+                      }}
+                    >
+                      <RateReviewOutlinedIcon style={{ color: "black" }} />
+                    </IconButton>
+                  </Grid>
                 </Grid>
               </TableCell>
             </TableRow>
@@ -93,19 +101,44 @@ export default function BasicTable() {
 
       <Dialog
         open={openEdit}
-        onClose={() => setOpenEdit(false)}
+        onClose={() => {
+          setOpenEdit(false);
+        }}
+        aria-describedby="alert-dialog-slide-description"
         maxWidth="xl"
         PaperProps={{
           style: {
             width: "55%",
-            height: "75%",
+            height: "60%",
           },
         }}
       >
-        <EditPatientPopDialogbox isOpen={openEdit} setIsOpen={setOpenEdit} />
+        <EditPatientPopDialogbox
+          isOpen={openEdit}
+          setIsOpen={setOpenEdit}
+          // handleUpdate={handleUpdate}
+        />
       </Dialog>
 
-      {/* <PatientFeedbackPopDialogbox /> */}
+      <Dialog
+        open={openFeedback}
+        onClose={() => {
+          setOpenFeedback(false);
+        }}
+        aria-describedby="alert-dialog-slide-description"
+        maxWidth="xl"
+        PaperProps={{
+          style: {
+            width: "35%",
+            height: "45%",
+          },
+        }}
+      >
+        <PatientFeedbackPopDialogbox
+          isOpen={openFeedback}
+          setIsOpen={setOpenFeedback}
+        />
+      </Dialog>
     </div>
   );
 }
