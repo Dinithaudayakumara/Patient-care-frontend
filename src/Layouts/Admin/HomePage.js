@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPatients } from "../../store/actions/patientAction";
 import { getAllDoctors } from "../../store/actions/doctorAction";
 import { getAllPharmacists } from "../../store/actions/pharmacistAction";
+import background from "../../assets/images/changed-Adminbackgroundpic.jpeg";
 
 export default function Adminbackgroundpic() {
   const dispatch = useDispatch();
@@ -40,7 +41,12 @@ export default function Adminbackgroundpic() {
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${background})`,
+        height: "100vh",
+      }}
+    >
       <Logo />
       <Typography sx={{ fontSize: 30 }}>
         <b>Patient</b> <span>Care</span>

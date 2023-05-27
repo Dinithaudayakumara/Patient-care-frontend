@@ -8,9 +8,10 @@ export default function LoginSection() {
   return (
     <div>
       <div style={{ paddingTop: 10, paddingBottom: 10 }}>
-        <Typography>Patient Care</Typography>
+        <Typography fontSize={32}>
+          <b>Patient</b> <span style={{ color: "red" }}>Care</span>
+        </Typography>
       </div>
-      <Typography>Log in</Typography>
 
       <div
         style={{
@@ -21,7 +22,10 @@ export default function LoginSection() {
         }}
       >
         <LoginTextBox
-          info={{ name: "User Name", placeholder: "Enter your user name" }}
+          info={{
+            name: "User Name / Email",
+            placeholder: "Enter your user name",
+          }}
         />
         <div style={{ paddingTop: 10 }}>
           <LoginTextBox

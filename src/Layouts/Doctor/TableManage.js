@@ -109,7 +109,7 @@ export default function BasicTable() {
         PaperProps={{
           style: {
             width: "55%",
-            height: "60%",
+            height: "70%",
           },
         }}
       >
@@ -129,8 +129,8 @@ export default function BasicTable() {
         maxWidth="xl"
         PaperProps={{
           style: {
-            width: "35%",
-            height: "45%",
+            width: "45%",
+            height: "62%",
           },
         }}
       >
