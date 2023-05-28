@@ -4,7 +4,9 @@ import React from "react";
 export default function LogoutButton() {
   return (
     <div>
-      <Button variant="contained">Logout</Button>
+      <Button variant="contained" href="/">
+        Logout
+      </Button>
     </div>
   );
 }

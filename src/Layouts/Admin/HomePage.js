@@ -75,7 +75,7 @@ export default function Adminbackgroundpic() {
         </Grid>
       </Grid>
 
-      <Button>
+      <Button href="/">
         <ExitToAppIcon />
 
         <Typography>Logout</Typography>

@@ -1,11 +1,15 @@
 import { TextField, Typography } from "@mui/material";
 import React from "react";
 
-export default function LoginTextBox({ info }) {
+export default function LoginTextBox({ label, placeholder, handleChange }) {
   return (
     <div>
-      <Typography>{info.name}</Typography>
-      <TextField placeholder={info.placeholder} fullWidth />
+      <Typography>{label}</Typography>
+      <TextField
+        placeholder={placeholder}
+        fullWidth
+        onChange={(e) => handleChange(e.target.value, label)}
+      />
     </div>
   );
 }

@@ -27,10 +27,22 @@ export default function PatientFeedbackPopDialogbox() {
         </Typography>
         <Grid pl={2}>
           <Box sx={{ ...commonStyles, borderRadius: "16px" }}>
-            <Rating name="size-small" defaultValue={2} size="small" />
+            <Rating
+              name="read-only"
+              defaultValue={2}
+              size="small"
+              precision={0.5}
+              readOnly
+            />
           </Box>
           <Box sx={{ ...commonStyles, borderRadius: "16px" }}>
-            <Rating name="size-small" defaultValue={2} size="small" />
+            <Rating
+              name="read-only"
+              defaultValue={2}
+              size="small"
+              precision={0.5}
+              readOnly
+            />
           </Box>
         </Grid>
       </Grid>

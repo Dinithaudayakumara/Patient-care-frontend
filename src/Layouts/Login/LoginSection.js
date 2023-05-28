@@ -1,10 +1,44 @@
 import { Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import LoginTextBox from "../../components/Login/LoginTextBox";
 import LoginButton from "../../components/Login/LoginButton";
-import SignUpLabel from "../../components/SignUpLabel";
+import { useDispatch, useSelector } from "react-redux";
+import { logIn } from "../../store/actions/signInAction";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginSection() {
+  const dispatch = useDispatch();
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  console.log(email, password);
+
+  const handleOnClick = () => {
+    dispatch(logIn(email, password));
+  };
+
+  const navigate = useNavigate();
+
+  const { loginErrorMessage, userLoginLoadingStatus, user } = useSelector(
+    (store) => store.signInReducer
+  );
+
+  useEffect(() => {
+    console.log(userLoginLoadingStatus);
+    console.log(loginErrorMessage);
+    if (userLoginLoadingStatus === "sucess") {
+      console.log(user);
+      if (user.employeeType === "doctor") {
+        navigate("/doctor");
+      } else if (user.employeeType === "pharmacist") {
+        navigate("/pharmacists");
+      } else if (user.employeeType === "admin") {
+        navigate("/admin");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userLoginLoadingStatus]);
+
   return (
     <div>
       <div style={{ paddingTop: 10, paddingBottom: 10 }}>
@@ -22,30 +56,37 @@ export default function LoginSection() {
         }}
       >
         <LoginTextBox
-          info={{
-            name: "User Name / Email",
-            placeholder: "Enter your user name",
-          }}
+          label="Email"
+          placeholder="Enter your email address"
+          handleChange={setEmail}
         />
         <div style={{ paddingTop: 10 }}>
           <LoginTextBox
-            info={{ name: "Password", placeholder: "Enter your user password" }}
+            label="Password"
+            placeholder="Enter your passsword"
+            handleChange={setPassword}
           />
         </div>
       </div>
+      {userLoginLoadingStatus === "fail" ? (
+        <Typography pt={2} color="red" fontSize={14}>
+          Email or password incorrect
+        </Typography>
+      ) : (
+        ""
+      )}
+
       <div
         style={{
-          paddingTop: 40,
+          paddingTop: 30,
           marginLeft: "auto",
           marginRight: "auto",
           width: "12%",
           paddingBottom: 20,
         }}
       >
-        <LoginButton />
+        <LoginButton handleOnClick={handleOnClick} />
       </div>
-
-      <SignUpLabel />
     </div>
   );
 }
