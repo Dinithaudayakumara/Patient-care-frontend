@@ -29,6 +29,10 @@ export default function BasicTable() {
     setOpen(true);
   };
 
+  const handleOnClick = () => {
+    handleClose();
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -79,7 +83,7 @@ export default function BasicTable() {
           },
         }}
       >
-        <PatientPrescriptionPopDialogbox />
+        <PatientPrescriptionPopDialogbox handleOnClick={handleOnClick} />
       </Dialog>
     </div>
   );

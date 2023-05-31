@@ -32,6 +32,9 @@ export default function BasicTable() {
   }, []);
 
   const { allPatientList } = useSelector((store) => store.patientReducer);
+  const handleUpdate = () => {
+    setOpenEdit(false);
+  };
 
   return (
     <div style={{ paddingLeft: 50 }}>
@@ -114,6 +117,7 @@ export default function BasicTable() {
         }}
       >
         <EditPatientPopDialogbox
+          handleUpdate={handleUpdate}
           isOpen={openEdit}
           setIsOpen={setOpenEdit}
           // handleUpdate={handleUpdate}

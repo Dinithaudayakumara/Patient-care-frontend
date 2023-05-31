@@ -65,6 +65,7 @@ export default function LoginSection() {
             label="Password"
             placeholder="Enter your passsword"
             handleChange={setPassword}
+            password="password"
           />
         </div>
       </div>
