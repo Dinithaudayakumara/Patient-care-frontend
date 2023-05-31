@@ -5,6 +5,7 @@ const inisialState = {
   allDoctorList: [],
   adminSelectedDoctor: {},
   doctorUpdateStatus: "notStarted",
+  doctorCreateStatus: "notStarted",
 };
 
 const doctorReducer = (state = inisialState, action) => {
@@ -38,6 +39,18 @@ const doctorReducer = (state = inisialState, action) => {
 
     case Actions.CLEAR_DOCTOR_UPDATE_STATUS:
       return { ...state, doctorUpdateStatus: "notStarted" };
+
+    case Actions.CREATE_DOCTOR_START:
+      return { ...state, doctorCreateStatus: "loading" };
+
+    case Actions.CREATE_DOCTOR_SUCCESS:
+      return {
+        ...state,
+        doctorCreateStatus: "success",
+      };
+
+    case Actions.CREATE_DOCTOR_FAIL:
+      return { ...state, doctorCreateStatus: "fail" };
 
     default:
       return state;

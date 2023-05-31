@@ -5,8 +5,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 export default function BackButton() {
   return (
     <div>
-      <IconButton color="primary" aria-label="add to shopping cart">
-        <ArrowBackIcon style={{ fontSize: 50 }} />{" "}
+      <IconButton
+        color="primary"
+        aria-label="add to shopping cart"
+        href="/admin"
+      >
+        <ArrowBackIcon style={{ fontSize: 50 }} />
       </IconButton>
     </div>
   );

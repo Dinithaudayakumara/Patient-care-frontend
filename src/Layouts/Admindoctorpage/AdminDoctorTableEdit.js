@@ -53,6 +53,13 @@ export default function AdminDoctorTableEdit({ handleUpdate }) {
             handleChange={handleChange}
           />
           <AddUserTextBox
+            fieldname="Number "
+            placeholder="Enter your Number"
+            value={adminSelectedDoctor.mobileNumber}
+            name="mobileNumber"
+            handleChange={handleChange}
+          />
+          <AddUserTextBox
             fieldname="Type of Doctor "
             placeholder="Enter your Name"
             value={adminSelectedDoctor.specialty}

@@ -24,8 +24,12 @@ import {
 
 export default function BasicTable() {
   const dispatch = useDispatch();
-  const { allPharmacistList, pharmacistUpdateStatus, adminSelectedPharmacist } =
-    useSelector((store) => store.pharmacistReducer);
+  const {
+    allPharmacistList,
+    pharmacistUpdateStatus,
+    adminSelectedPharmacist,
+    pharmacistCreateStatus,
+  } = useSelector((store) => store.pharmacistReducer);
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -40,10 +44,13 @@ export default function BasicTable() {
   };
 
   useEffect(() => {
-    if (pharmacistUpdateStatus === "completed") {
+    if (
+      pharmacistUpdateStatus === "completed" ||
+      pharmacistCreateStatus === "success"
+    ) {
       dispatch(getAllPharmacists());
     }
-  }, [dispatch, pharmacistUpdateStatus]);
+  }, [dispatch, pharmacistUpdateStatus, pharmacistCreateStatus]);
 
   return (
     <div>

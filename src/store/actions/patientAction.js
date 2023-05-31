@@ -12,6 +12,11 @@ export const UPDATE_PATIENT_FAIL = "UPDATE_PATIENT_FAIL";
 
 export const CLEAR_PATIENT_UPDATE_STATUS = "CLEAR_PATIENT_UPDATE_STATUS";
 
+//Create
+export const CREATE_PATIENT_START = "CREATE_PATIENT_START";
+export const CREATE_PATIENT_SUCCESS = "CREATE_PATIENT_SUCCESS";
+export const CREATE_PATIENT_FAIL = "CREATE_PATIENT_FAIL";
+
 export const getAllPatients = () => {
   return (dispatch) => {
     dispatch({ type: GET_ALL_PATIENTS_LOADING });
@@ -59,5 +64,26 @@ export const updatePatient = (patient) => {
 export const clearPatientUpdateStatus = () => {
   return (dispatch) => {
     dispatch({ type: CLEAR_PATIENT_UPDATE_STATUS });
+  };
+};
+
+//Create
+export const createPatient = (patient) => {
+  console.log(patient);
+  return (dispatch) => {
+    dispatch({ type: CREATE_PATIENT_START });
+    axios
+      .post("http://localhost:5004/patient/create", { patient })
+      .then((response) => {
+        console.log(response.data);
+        dispatch({
+          type: CREATE_PATIENT_SUCCESS,
+          payload: response.data.patient,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: CREATE_PATIENT_FAIL });
+      });
   };
 };

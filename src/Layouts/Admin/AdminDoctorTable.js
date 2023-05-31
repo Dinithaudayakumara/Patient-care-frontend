@@ -24,8 +24,12 @@ import {
 
 export default function BasicTable() {
   const dispatch = useDispatch();
-  const { allDoctorList, doctorUpdateStatus, adminSelectedDoctor } =
-    useSelector((store) => store.doctorReducer);
+  const {
+    allDoctorList,
+    doctorUpdateStatus,
+    adminSelectedDoctor,
+    doctorCreateStatus,
+  } = useSelector((store) => store.doctorReducer);
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
@@ -40,10 +44,13 @@ export default function BasicTable() {
   };
 
   useEffect(() => {
-    if (doctorUpdateStatus === "completed") {
+    if (
+      doctorUpdateStatus === "completed" ||
+      doctorCreateStatus === "success"
+    ) {
       dispatch(getAllDoctors());
     }
-  }, [dispatch, doctorUpdateStatus]);
+  }, [dispatch, doctorUpdateStatus, doctorCreateStatus]);
 
   return (
     <div style={{ paddingLeft: 10, paddingRight: 10 }}>

@@ -12,6 +12,11 @@ export const UPDATE_PHARMACIST_FAIL = "UPDATE_PHARMACIST_FAIL";
 
 export const CLEAR_PHARMACIST_UPDATE_STATUS = "CLEAR_PHARMACIST_UPDATE_STATUS";
 
+//Create
+export const CREATE_PHARMACIST_START = "CREATE_PHARMACIST_START";
+export const CREATE_PHARMACIST_SUCCESS = "CREATE_PHARMACIST_SUCCESS";
+export const CREATE_PHARMACIST_FAIL = "CREATE_PHARMACIST_FAIL";
+
 export const getAllPharmacists = () => {
   return (dispatch) => {
     dispatch({ type: GET_ALL_PHARMACISTS_LOADING });
@@ -59,5 +64,26 @@ export const updatePharmacist = (pharmacist) => {
 export const clearPharmacistUpdateStatus = () => {
   return (dispatch) => {
     dispatch({ type: CLEAR_PHARMACIST_UPDATE_STATUS });
+  };
+};
+
+//Create
+export const createPharmacist = (pharmacist) => {
+  console.log(pharmacist);
+  return (dispatch) => {
+    dispatch({ type: CREATE_PHARMACIST_START });
+    axios
+      .post("http://localhost:5004/pharmacist/create", { pharmacist })
+      .then((response) => {
+        console.log(response.data);
+        dispatch({
+          type: CREATE_PHARMACIST_SUCCESS,
+          payload: response.data.pharmacist,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: CREATE_PHARMACIST_FAIL });
+      });
   };
 };

@@ -5,6 +5,7 @@ const inisialState = {
   allPatientList: [],
   adminSelectedPatient: {},
   patientUpdateStatus: "notStarted",
+  patientCreateStatus: "notStarted",
 };
 
 const patientReducer = (state = inisialState, action) => {
@@ -38,6 +39,18 @@ const patientReducer = (state = inisialState, action) => {
 
     case Actions.CLEAR_PATIENT_UPDATE_STATUS:
       return { ...state, patientUpdateStatus: "notStarted" };
+
+    case Actions.CREATE_PATIENT_START:
+      return { ...state, patientCreateStatus: "loading" };
+
+    case Actions.CREATE_PATIENT_SUCCESS:
+      return {
+        ...state,
+        patientCreateStatus: "success",
+      };
+
+    case Actions.CREATE_PATIENT_FAIL:
+      return { ...state, patientCreateStatus: "fail" };
 
     default:
       return state;

@@ -5,12 +5,26 @@ import SearchBarWithButton from "../common/SearchBarWithButton";
 import AdminDoctorTable from "./AdminDoctorTable";
 import { Dialog } from "@mui/material";
 import DoctorAddNewDialogBox from "./DoctorAddNewDialogBox";
+import { useDispatch } from "react-redux";
+import { setAdminSelectedDoctor } from "../../store/actions/doctorAction";
 
 export default function DoctorAccountDashborad() {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
 
   const OnClick = () => {
     setOpen(true);
+    dispatch(
+      setAdminSelectedDoctor({
+        email: "",
+        firstName: "",
+        lastName: "",
+        mobileNumber: "",
+        password: "",
+        specialty: "",
+        userName: "",
+      })
+    );
   };
 
   const handleClose = () => {
@@ -34,7 +48,7 @@ export default function DoctorAccountDashborad() {
           },
         }}
       >
-        <DoctorAddNewDialogBox />
+        <DoctorAddNewDialogBox handleClose={handleClose} />
       </Dialog>
     </div>
   );

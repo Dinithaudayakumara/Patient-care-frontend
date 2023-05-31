@@ -5,6 +5,7 @@ const inisialState = {
   allPharmacistList: [],
   adminSelectedPharmacist: {},
   pharmacistUpdateStatus: "notStarted",
+  pharmacistCreateStatus: "notStarted",
 };
 
 const pharmacistReducer = (state = inisialState, action) => {
@@ -38,6 +39,18 @@ const pharmacistReducer = (state = inisialState, action) => {
 
     case Actions.CLEAR_PHARMACIST_UPDATE_STATUS:
       return { ...state, pharmacistUpdateStatus: "notStarted" };
+
+    case Actions.CREATE_PHARMACIST_START:
+      return { ...state, pharmacistCreateStatus: "loading" };
+
+    case Actions.CREATE_PHARMACIST_SUCCESS:
+      return {
+        ...state,
+        pharmacistCreateStatus: "success",
+      };
+
+    case Actions.CREATE_PHARMACIST_FAIL:
+      return { ...state, pharmacistCreateStatus: "fail" };
 
     default:
       return state;

@@ -12,6 +12,11 @@ export const UPDATE_DOCTOR_FAIL = "UPDATE_DOCTOR_FAIL";
 
 export const CLEAR_DOCTOR_UPDATE_STATUS = "CLEAR_DOCTOR_UPDATE_STATUS";
 
+//Create
+export const CREATE_DOCTOR_START = "CREATE_DOCTOR_START";
+export const CREATE_DOCTOR_SUCCESS = "CREATE_DOCTOR_SUCCESS";
+export const CREATE_DOCTOR_FAIL = "CREATE_DOCTOR_FAIL";
+
 export const getAllDoctors = () => {
   return (dispatch) => {
     dispatch({ type: GET_ALL_DOCTORS_LOADING });
@@ -56,5 +61,26 @@ export const updateDoctor = (doctor) => {
 export const clearDoctorUpdateStatus = () => {
   return (dispatch) => {
     dispatch({ type: CLEAR_DOCTOR_UPDATE_STATUS });
+  };
+};
+
+//Create
+export const createDoctor = (doctor) => {
+  console.log(doctor);
+  return (dispatch) => {
+    dispatch({ type: CREATE_DOCTOR_START });
+    axios
+      .post("http://localhost:5004/doctor/create", { doctor })
+      .then((response) => {
+        console.log(response.data);
+        dispatch({
+          type: CREATE_DOCTOR_SUCCESS,
+          payload: response.data.doctor,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        dispatch({ type: CREATE_DOCTOR_FAIL });
+      });
   };
 };
