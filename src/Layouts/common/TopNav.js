@@ -4,8 +4,13 @@ import DashBoardDetails from "./DashBoardDetails";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import LogoutButton from "../../components/common/Details/LogoutButton";
 import { Divider } from "@mui/material";
+import { useSelector } from "react-redux";
 
 export default function TopNav() {
+  const { user } = useSelector((store) => store.signInReducer);
+
+  console.log(user);
+
   return (
     <div>
       <Grid2 container>
@@ -14,7 +19,7 @@ export default function TopNav() {
         </Grid2>
         <Grid2 container xs={11} justifyContent="space-between" pt={3}>
           <Grid2 item pl={1}>
-            <DashBoardDetails />
+            <DashBoardDetails userName={user.userName} userId={user.id} />
           </Grid2>
           <Grid2 item pr={5}>
             <LogoutButton />

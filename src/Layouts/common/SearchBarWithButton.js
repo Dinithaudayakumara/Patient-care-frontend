@@ -7,10 +7,10 @@ export default function SearchBarWithButton({ OnClick }) {
   return (
     <div>
       <Grid2 container justifyContent="space-between" pt={2}>
-        <Grid2 item pl={7}>
+        <Grid2 item pl={2}>
           <SearchBar />
         </Grid2>
-        <Grid2 item pr={7}>
+        <Grid2 item pr={8}>
           <ActionButton OnClick={OnClick} />
         </Grid2>
       </Grid2>

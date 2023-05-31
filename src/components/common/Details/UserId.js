@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function UserId() {
-  return <div>UserId</div>;
+export default function UserId({ userId }) {
+  return <div>{userId}</div>;
 }

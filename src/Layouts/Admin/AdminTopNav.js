@@ -25,7 +25,6 @@ export default function AdminTopNav({ image, userType }) {
               <Typography sx={{ fontSize: 30 }}>
                 <b>{userType}</b>
               </Typography>
-              <Typography>#PHA1234</Typography>
               <Typography>Admin</Typography>
             </Grid>
           </Grid>
